@@ -1,39 +1,96 @@
 ﻿Console.WriteLine("Benvenuto nel Gioco dell'Impiccato!");
 Console.WriteLine("In questo gioco, il tuo obiettivo è indovinare una parola segreta, lettera per lettera, prima che l'impiccato venga completato.");
 Console.WriteLine("Ogni volta che indovini una lettera correttamente, la parola si aggiornerà. Se invece sbagli, una parte dell'impiccato apparirà. Hai un numero limitato di tentativi, quindi fai attenzione!");
-Console.WriteLine("Sei pronto a iniziare? Scegli una tema per la parola!" +
+
+string tema_scelto()
+{
+    Console.WriteLine("Sei pronto a iniziare? Scegli una tema per la parola!" +
     "\n1. Animale" +
     "\n2. Oggetto" +
     "\n3. Paese" +
     "\n4. Piante");
 
-string tema = Console.ReadLine();
-string filePath;
+    string tema = Console.ReadLine();
 
-if (tema != null)
+    if (tema != null)
+    {
+        if (tema == "Animale" || tema == "animale" || tema == "1")
+        {
+            return "impiccato_animale.txt";
+        }
+        else if (tema == "Oggetto" || tema == "oggetto" || tema == "2")
+        {
+            return "impiccato_oggetto.txt";
+        }
+        else if (tema == "Paese" || tema == "paese" || tema == "3")
+        {
+            return "impiccato_paese.txt";
+        }
+        else if (tema == "Piante" || tema == "piante" || tema == "4")
+        {
+            return "impiccato_piante.txt";
+        }
+        else
+        {
+            return "Errore! La tema non valida";
+        }
+    }
+    return "Errore! Perfavore inserisci la tema valida";
+}
+
+void parole(string[] p, ref string[] pd)
 {
-    if (tema == "Animale" || tema == "animale")
+    int a = 0, b = 0, c = 0;
+    Console.WriteLine("Scegli la difficoltà del gioco:" +
+        "\n1. Facile - Parole corte, più tentativi disponibili." +
+        "\n2. Normale - Parole di lunghezza media, tentativi moderati." +
+        "\n3. Difficile - Parole lunghe, pochi tentativi.");
+    string d = Console.ReadLine();
+
+    if (d != null)
     {
-        filePath = "impiccato_animale.txt";
-    }
-    else if (tema == "Oggetto" || tema == "oggetto")
-    {
-        filePath = "impiccato_oggetto.txt";
-    }
-    else if (tema == "Paese" || tema == "paese")
-    {
-        filePath = "impiccato_paese.txt";
-    }
-    else if (tema == "Piante" || tema == "piante")
-    {
-        filePath = "impiccato_piante.txt";
+        if (d == "Facile" || d == "facile" || d == "1")
+        {
+            b += 20;
+        }
+        else if (d == "Normale" || d == "normale" || d == "2")
+        {
+            a = 20;
+            b = 40;
+        }
+        else if (d == "Difficile" || d == "difficile" || d == "3")
+        {
+            a = 20;
+            b = 60;
+        }
+        else
+        {
+            Console.WriteLine("Errore! La difficoltà sbagliata");
+        }
+        for (int i = a; i < b; i++)
+        {
+            pd[c++] = p[i];
+        }
     }
     else
     {
-        Console.WriteLine("Errore! La tema non valida");
+        Console.WriteLine("Errore! Perfavore inserisci la tema valida");
     }
+}
+
+string[] parole_scelte = new string[20];
+
+string filePath = tema_scelto();
+if (filePath.Contains("Errore"))
+{
+    Console.WriteLine(filePath);
 }
 else
 {
-    Console.WriteLine("Errore! Perfavore inserisci la tema valida");
+    string[] lines = File.ReadAllLines(filePath);
+    parole(lines, ref parole_scelte);
+    for (int i = 0; i < parole_scelte.Length; i++)
+    {
+        Console.WriteLine(parole_scelte[i]);
+    }
 }
