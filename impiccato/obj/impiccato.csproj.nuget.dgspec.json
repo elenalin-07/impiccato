@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zxt02\\Documents\\inf\\Visual Studio 2022 C#\\impiccato\\impiccato\\impiccato.csproj": {}
+    "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\impiccato.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zxt02\\Documents\\inf\\Visual Studio 2022 C#\\impiccato\\impiccato\\impiccato.csproj": {
+    "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\impiccato.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zxt02\\Documents\\inf\\Visual Studio 2022 C#\\impiccato\\impiccato\\impiccato.csproj",
+        "projectUniqueName": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\impiccato.csproj",
         "projectName": "impiccato",
-        "projectPath": "C:\\Users\\zxt02\\Documents\\inf\\Visual Studio 2022 C#\\impiccato\\impiccato\\impiccato.csproj",
+        "projectPath": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\impiccato.csproj",
         "packagesPath": "C:\\Users\\zxt02\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zxt02\\Documents\\inf\\Visual Studio 2022 C#\\impiccato\\impiccato\\obj\\",
+        "outputPath": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
