@@ -1,0 +1,14 @@
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\bin\Debug\net8.0\impiccato.exe
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\bin\Debug\net8.0\impiccato.deps.json
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\bin\Debug\net8.0\impiccato.runtimeconfig.json
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\bin\Debug\net8.0\impiccato.dll
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\bin\Debug\net8.0\impiccato.pdb
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.AssemblyInfoInputs.cache
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.AssemblyInfo.cs
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.csproj.CoreCompileInputs.cache
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.dll
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\refint\impiccato.dll
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.pdb
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\impiccato.genruntimeconfig.cache
+C:\Users\zxt02\Documents\inf\GitHub\impiccato\impiccato\obj\Debug\net8.0\ref\impiccato.dll
