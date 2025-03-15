@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lin.elena\\Desktop\\impiccato\\",
+  "WorkspaceRootPath": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C9ACE7FC-8CA0-49B8-AE26-DE751CDAE133}|impiccato\\impiccato.csproj|c:\\users\\lin.elena\\desktop\\impiccato\\impiccato\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C9ACE7FC-8CA0-49B8-AE26-DE751CDAE133}|impiccato\\impiccato.csproj|c:\\users\\zxt02\\documents\\inf\\github\\impiccato\\impiccato\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C9ACE7FC-8CA0-49B8-AE26-DE751CDAE133}|impiccato\\impiccato.csproj|solutionrelative:impiccato\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -20,11 +20,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lin.elena\\Desktop\\impiccato\\impiccato\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\Program.cs",
               "RelativeDocumentMoniker": "impiccato\\Program.cs",
-              "ToolTip": "C:\\Users\\lin.elena\\Desktop\\impiccato\\impiccato\\Program.cs",
+              "ToolTip": "C:\\Users\\zxt02\\Documents\\inf\\GitHub\\impiccato\\impiccato\\Program.cs",
               "RelativeToolTip": "impiccato\\Program.cs",
-              "ViewState": "AgIAAGwAAAAAAAAAAAAAAHwAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAIwH8AAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-14T16:13:43.896Z",
               "EditorCaption": ""

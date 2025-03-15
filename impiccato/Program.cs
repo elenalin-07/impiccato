@@ -39,7 +39,7 @@ string tema_scelto()
     return "Errore! Perfavore inserisci la tema valida";
 }
 
-void parole(string[] p, ref string[] pd)
+void parole(string[] p, ref string[] pd, ref int n)
 {
     int a = 0, b = 0, c = 0;
     Console.WriteLine("Scegli la difficoltà del gioco:" +
@@ -52,15 +52,18 @@ void parole(string[] p, ref string[] pd)
     {
         if (d == "Facile" || d == "facile" || d == "1")
         {
+            n = 15;
             b += 20;
         }
         else if (d == "Normale" || d == "normale" || d == "2")
         {
+            n = 10;
             a = 20;
             b = 40;
         }
         else if (d == "Difficile" || d == "difficile" || d == "3")
         {
+            n = 5;
             a = 20;
             b = 60;
         }
@@ -81,26 +84,56 @@ void parole(string[] p, ref string[] pd)
 
 string parola_da_indovina(string p)
 {
-    string parola_con_trattino;
+    string parola = null;
     if (p.Contains("Facile"))
     {
-        parola_con_trattino = p.Substring(6);
+        parola = p.Substring(6);
     }
     else if (p.Contains("Normale"))
     {
-        parola_con_trattino = p.Substring(7);
+        parola = p.Substring(7);
     }
     else
     {
-        parola_con_trattino = p.Substring(9);
+        parola = p.Substring(9);
     }
-    return parola_con_trattino.ToLower();
+    return parola.ToLower();
 }
 
-bool indovina(string p)
+bool indovina(string p, ref int n)
 {
-    Console.WriteLine("Adesso iniziamo a indovinare!");
-    string parola_con_trattini = parola_da_indovina(p);
+    Console.WriteLine("Adesso indovina la parola nascosta una lettera alla volta!");
+    string parola = parola_da_indovina(p);
+    char[] parola_segreta = parola.ToCharArray();
+    char[] parola_con_trattini = new char[parola_segreta.Length];
+    for (int i = 0; i < parola_con_trattini.Length; i++)
+    {
+        parola_con_trattini[i] = '_';
+    }
+
+    char lettera = '0';
+    int numero_lettere_indovinata = 0, a = 0;
+    char[] lettere_indovinata = new char[parola_segreta.Length];
+
+    while (numero_lettere_indovinata < parola_con_trattini.Length)
+    {
+        Console.WriteLine("Inserisci una lettera");
+        lettera = Console.ReadKey().KeyChar;
+
+        for (int i = 0; i < parola_segreta.Length; i++)
+        {
+            if (parola_segreta[i] == lettera)
+            {
+                numero_lettere_indovinata++;
+                lettere_indovinata[a++] = lettera;
+            }
+            else
+            {
+                
+            }
+        }
+    }
+        
     return false;
 }
 
@@ -113,6 +146,7 @@ string parola_casuale(string[] parole)
 string[] parole_scelte = new string[20];
 string parola;
 
+int num_tentativi = 0;
 string filePath = tema_scelto();
 if (filePath.Contains("Errore"))
 {
@@ -121,6 +155,6 @@ if (filePath.Contains("Errore"))
 else
 {
     string[] lines = File.ReadAllLines(filePath);
-    parole(lines, ref parole_scelte);
+    parole(lines, ref parole_scelte, ref num_tentativi);
     parola = parola_casuale(parole_scelte);
 }
