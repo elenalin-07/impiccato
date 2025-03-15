@@ -2,6 +2,7 @@
 Console.WriteLine("In questo gioco, il tuo obiettivo è indovinare una parola segreta, lettera per lettera, prima che l'impiccato venga completato.");
 Console.WriteLine("Ogni volta che indovini una lettera correttamente, la parola si aggiornerà. Se invece sbagli, una parte dell'impiccato apparirà. Hai un numero limitato di tentativi, quindi fai attenzione!");
 
+Random random = new Random();
 string tema_scelto()
 {
     Console.WriteLine("Sei pronto a iniziare? Scegli una tema per la parola!" +
@@ -78,7 +79,39 @@ void parole(string[] p, ref string[] pd)
     }
 }
 
+string parola_da_indovina(string p)
+{
+    string parola_con_trattino;
+    if (p.Contains("Facile"))
+    {
+        parola_con_trattino = p.Substring(6);
+    }
+    else if (p.Contains("Normale"))
+    {
+        parola_con_trattino = p.Substring(7);
+    }
+    else
+    {
+        parola_con_trattino = p.Substring(9);
+    }
+    return parola_con_trattino.ToLower();
+}
+
+bool indovina(string p)
+{
+    Console.WriteLine("Adesso iniziamo a indovinare!");
+    string parola_con_trattini = parola_da_indovina(p);
+    return false;
+}
+
+string parola_casuale(string[] parole)
+{
+    int posizione = random.Next(0, 21);
+    return parole[posizione];
+}
+
 string[] parole_scelte = new string[20];
+string parola;
 
 string filePath = tema_scelto();
 if (filePath.Contains("Errore"))
@@ -89,8 +122,5 @@ else
 {
     string[] lines = File.ReadAllLines(filePath);
     parole(lines, ref parole_scelte);
-    for (int i = 0; i < parole_scelte.Length; i++)
-    {
-        Console.WriteLine(parole_scelte[i]);
-    }
+    parola = parola_casuale(parole_scelte);
 }
