@@ -5,84 +5,105 @@ Console.WriteLine("Ogni volta che indovini una lettera correttamente, la parola 
 Random random = new Random();
 string tema_scelto()
 {
+    bool s = false;
     Console.WriteLine("Sei pronto a iniziare? Scegli una tema per la parola!" +
     "\n1. Animale" +
     "\n2. Oggetto" +
     "\n3. Paese" +
     "\n4. Piante");
 
-    string tema = Console.ReadLine().ToLower();
-
-    if (tema != null)
+    while (s == false)
     {
-        if (tema == "animale" || tema == "1")
+        string tema = Console.ReadLine().ToLower();
+        if (tema != null)
         {
-            return "impiccato_animale.txt";
-        }
-        else if (tema == "oggetto" || tema == "2")
-        {
-            return "impiccato_oggetto.txt";
-        }
-        else if (tema == "paese" || tema == "3")
-        {
-            return "impiccato_paese.txt";
-        }
-        else if (tema == "piante" || tema == "4")
-        {
-            return "impiccato_piante.txt";
+            if (tema == "animale" || tema == "1")
+            {
+                s = true;
+                return "impiccato_animale.txt";
+            }
+            else if (tema == "oggetto" || tema == "2")
+            {
+                s = true;
+                return "impiccato_oggetto.txt";
+            }
+            else if (tema == "paese" || tema == "3")
+            {
+                s = true;
+                return "impiccato_paese.txt";
+            }
+            else if (tema == "piante" || tema == "4")
+            {
+                s = true;
+                return "impiccato_piante.txt";
+            }
+            else
+            {
+                Console.WriteLine("Errore! La tema non valida" +
+                    "\nPerfavore inserisci la tema valida");
+            }
         }
         else
         {
-            return "Errore! La tema non valida";
+            Console.WriteLine("Errore! Perfavore inserisci la tema valida");
         }
     }
-    return "Errore! Perfavore inserisci la tema valida";
+    return "Errore";
 }
 
 void parole(string[] p, ref string[] pd, int n)
 {
+    bool s = false;
     int a = 0, b = 0, c = 0;
     Console.WriteLine("Scegli la difficoltà del gioco:" +
         "\n1. Facile - Parole corte, più tentativi disponibili (il numero dei tentativi: 10)." +
         "\n2. Normale - Parole di lunghezza media, tentativi moderati (il numero dei tentativi: 8)." +
         "\n3. Difficile - Parole lunghe, pochi tentativi (il numero dei tentativi: 5).");
+    
+    while (s == false)
+{
     string d = Console.ReadLine().ToLower();
 
-    if (d != null)
-    {
-        if (d == "facile" || d == "1")
+        if (d != null)
         {
-            n = 10;
-            b = 20;
-        }
-        else if (d == "normale" || d == "2")
-        {
-            n = 8;
-            a = 20;
-            b = 40;
-        }
-        else if (d == "difficile" || d == "3")
-        {
-            n = 5;
-            a = 40;
-            b = p.Length;
+            if (d == "facile" || d == "1")
+            {
+                n = 10;
+                b = 20;
+                s = true;
+            }
+            else if (d == "normale" || d == "2")
+            {
+                n = 8;
+                a = 20;
+                b = 40;
+                s = true;
+            }
+            else if (d == "difficile" || d == "3")
+            {
+                n = 5;
+                a = 40;
+                b = p.Length;
+                s = true;
+            }
+            else
+            {
+                Console.WriteLine("Errore! La difficoltà sbagliata" +
+                    "\nPerfavore inserisci la difficoltà valida");
+            }
+            if (b > p.Length)
+            {
+                b = p.Length;
+            }
+            for (int i = a; i < b; i++)
+            {
+                pd[c++] = p[i];
+            }
         }
         else
         {
-            Console.WriteLine("Errore! La difficoltà sbagliata");
+            Console.WriteLine("Errore! Perfavore inserisci la difficoltà valida");
         }
-        if (b > p.Length)
-        {
-            b = p.Length;
-        }
-        for (int i = a; i < b; i++)
-        {
-            pd[c++] = p[i];
-        }
-    }
-    else
-    {
-        Console.WriteLine("Errore! Perfavore inserisci la tema valida");
     }
 }
 
@@ -150,22 +171,26 @@ bool indovina(string p, int n)
 
         tentativi++;
 
+        bool s = false;
         if (tentativi > tentativi_per_indovinare_parola)
         {
-            Console.WriteLine(new string(parola_con_trattini));
-            Console.WriteLine("Vuoi provare a indovinare la parola completa? (si/no)");
-            string risposta = Console.ReadLine().ToLower();
+            while (s == false)
+            {
+                Console.WriteLine(new string(parola_con_trattini));
+                Console.WriteLine("Vuoi provare a indovinare la parola completa? (si/no)");
+                string risposta = Console.ReadLine().ToLower();
 
-            if (risposta == "si")
-            {
-                if (indovina_parola(p))
+                if (risposta == "si")
                 {
-                    return true;
+                    if (indovina_parola(p))
+                    {
+                        return true;
+                    }
                 }
-            }
-            else if (risposta != "si" && risposta != "no")
-            {
-                Console.WriteLine("Errore! La scelta sbagliata");
+                else if (risposta != "si" && risposta != "no")
+                {
+                    Console.WriteLine("Errore! La scelta sbagliata");
+                }
             }
         }
         if(!new string(parola_con_trattini).Contains("_"))
@@ -201,44 +226,37 @@ bool gioco()
     int num_tentativi = 0;
     string filePath = tema_scelto();
 
-    if (filePath.Contains("Errore"))
+    string[] lines = File.ReadAllLines(filePath);
+    parole(lines, ref parola_scelte, num_tentativi);
+    parola = parola_casuale(parola_scelte);
+    parola_segreta = parola_da_indovina(parola);
+
+    if (indovina(parola_segreta, num_tentativi) == true)
     {
-        Console.WriteLine(filePath);
+        Console.WriteLine("Congratulazioni! Hai indovinato la parola!");
     }
     else
     {
-        string[] lines = File.ReadAllLines(filePath);
-        parole(lines, ref parola_scelte, num_tentativi);
-        parola = parola_casuale(parola_scelte);
-        parola_segreta = parola_da_indovina(parola);
-
-        if (indovina(parola_segreta, num_tentativi) == true)
-        {
-            Console.WriteLine("Congratulazioni! Hai indovinato la parola!");
-        }
-        else
-        {
-            Console.WriteLine($"Oops! Hai esaurito tutti i tentativi, ma non preoccuparti! La parola segreta era: {parola_segreta}." +
-                $"\nNon arrenderti! Prova a fare meglio la prossima volta, ricordati che ogni tentativo è un passo più vicino alla vittoria! Ci vediamo al prossimo gioco!");
-        }
+        Console.WriteLine($"Oops! Hai esaurito tutti i tentativi, ma non preoccuparti! La parola segreta era: {parola_segreta}." +
+            $"\nNon arrenderti! Prova a fare meglio la prossima volta, ricordati che ogni tentativo è un passo più vicino alla vittoria! Ci vediamo al prossimo gioco!");
+    }
 
         Console.WriteLine("Vuoi provare di nuovo con una nuova parola? (si/no)");
         ris = Console.ReadLine().ToLower();
-        if (ris == "si")
-        {
-            return true;
-        }
+    if (ris == "si")
+    {
+        return true;
     }
     return false;
 }
 
 string parola_casuale(string[] parole)
 {
-    int posizione = random.Next(0, 21);
+    int posizione = random.Next(0, 20);
     return parole[posizione];
 }
 
-if(gioco() == true)
+if (gioco() == true)
 {
     Console.WriteLine("Fantastico! Sei pronto per un nuovo giro! Adesso, scegli una nuova parola e preparati a mettere alla prova le tue abilità! Ricorda, ogni errore è solo un passo verso la vittoria. Buona fortuna!");
     gioco();
