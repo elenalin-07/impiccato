@@ -39,19 +39,20 @@ string tema_scelto()
             }
             else
             {
-                Console.WriteLine("Errore! La tema non valida" +
-                    "\nPerfavore inserisci la tema valida");
+                Console.WriteLine("Errore! La risposta non valida" +
+                    "\nPerfavore inserisci la risposta valida");
             }
         }
         else
         {
-            Console.WriteLine("Errore! Perfavore inserisci la tema valida");
+            Console.WriteLine("Errore! La risposta non valida" +
+                    "\nPerfavore inserisci la risposta valida");
         }
     }
     return "Errore";
 }
 
-void parole(string[] p, ref string[] pd, int n)
+void parole(string[] p, ref string[] pd, ref int nt)
 {
     bool s = false;
     int a = 0, b = 0, c = 0;
@@ -68,28 +69,28 @@ void parole(string[] p, ref string[] pd, int n)
         {
             if (d == "facile" || d == "1")
             {
-                n = 10;
+                nt = 10;
                 b = 20;
                 s = true;
             }
             else if (d == "normale" || d == "2")
             {
-                n = 8;
+                nt = 8;
                 a = 20;
                 b = 40;
                 s = true;
             }
             else if (d == "difficile" || d == "3")
             {
-                n = 5;
+                nt = 5;
                 a = 40;
                 b = p.Length;
                 s = true;
             }
             else
             {
-                Console.WriteLine("Errore! La difficoltà sbagliata" +
-                    "\nPerfavore inserisci la difficoltà valida");
+                Console.WriteLine("Errore! La risposta non valida" +
+                    "\nPerfavore inserisci la risposta valida");
             }
             if (b > p.Length)
             {
@@ -102,7 +103,8 @@ void parole(string[] p, ref string[] pd, int n)
         }
         else
         {
-            Console.WriteLine("Errore! Perfavore inserisci la difficoltà valida");
+            Console.WriteLine("Errore! La risposta non valida" +
+                    "\nPerfavore inserisci la risposta valida");
         }
     }
 }
@@ -125,82 +127,92 @@ string parola_da_indovina(string p)
     return parola.ToLower();
 }
 
-bool indovina(string p, int n)
+bool indovina(string p, int tentativi_max)
 {
     Console.WriteLine("Adesso indovina la parola nascosta una lettera alla volta!");
     char[] lettere_parola_segreta = p.ToCharArray();
     char[] parola_con_trattini = new char[lettere_parola_segreta.Length];
+
     for (int i = 0; i < parola_con_trattini.Length; i++)
     {
         parola_con_trattini[i] = '_';
     }
 
-    char lettera = '0';
-    int numero_lettere_indovinata = 0;
-    int tentativi = 0;
-    int tentativi_per_indovinare_parola = 2;
-    char[] lettere_indovinata = new char[lettere_parola_segreta.Length];
+    char lettera;
+    int tentativi = 0, nTentativi_lettere_indovinate = 0;
+    char[] lettere_indovinate = new char[26];
+    bool game_over = false;
+    string risposta;
 
-    while (numero_lettere_indovinata < parola_con_trattini.Length)
+    while (!game_over)
     {
         Console.WriteLine(new string(parola_con_trattini));
-
-        Console.WriteLine("Inserisci una lettera");
+        Console.WriteLine($"le lettere provate: {new string(lettere_indovinate)}");
+        Console.WriteLine($"Tentativi rimasti: {tentativi_max - tentativi}");
+        Console.WriteLine("Inserisci una lettera:");
         lettera = Console.ReadKey().KeyChar;
-
         Console.WriteLine();
 
-        if (lettere_parola_segreta.Contains(lettera))
+        if (lettere_indovinate.Contains(lettera))
         {
-            numero_lettere_indovinata++;
+            Console.WriteLine("Hai già scelto questa lettera! Prova con una lettera diversa.");
+            continue;
+        }
 
-            for (int i = 0; i < lettere_parola_segreta.Length; i++)
+        bool lettera_corretta = false;
+        for (int i = 0; i < lettere_parola_segreta.Length; i++)
+        {
+            if (lettere_parola_segreta[i] == lettera)
             {
-                if (lettere_parola_segreta[i] == lettera)
-                {
-                    parola_con_trattini[i] = lettere_parola_segreta[i];
-                }
+                parola_con_trattini[i] = lettera;
+                lettera_corretta = true;
             }
+        }
 
-            Console.WriteLine("Bravo! Hai indovinato una lettera!");
+        if (lettera_corretta)
+        {
+            nTentativi_lettere_indovinate++;
+            Console.WriteLine("Bravo! Hai indovinato una lettera.");
         }
         else
         {
-            Console.WriteLine("Oops! La lettera che hai scelto non è corretta. Riprova! Hai ancora tempo, non arrenderti!");
+            Console.WriteLine("Oops! La lettera che hai scelto non è corretta.");
         }
 
         tentativi++;
 
-        bool s = false;
-        if (tentativi > tentativi_per_indovinare_parola)
-        {
-            while (s == false)
-            {
-                Console.WriteLine(new string(parola_con_trattini));
-                Console.WriteLine("Vuoi provare a indovinare la parola completa? (si/no)");
-                string risposta = Console.ReadLine().ToLower();
+        lettere_indovinate[tentativi] = lettera;
 
-                if (risposta == "si")
+        if (!new string(parola_con_trattini).Contains("_"))
+        {
+            Console.WriteLine("Congratulazioni! Hai indovinato la parola!");
+            game_over = true;
+        }
+        else if (tentativi >= tentativi_max)
+        {
+            Console.WriteLine($"Hai esaurito i tentativi. La parola segreta era: {p}");
+            game_over = true;
+        }
+        else if (nTentativi_lettere_indovinate > 2)
+        {
+            Console.WriteLine(new string(parola_con_trattini));
+            Console.WriteLine("Sei pronto a indovinare la parola completa? (si/no)");
+            risposta = Console.ReadLine().ToLower();
+
+            if (risposta == "si")
+            {
+                if (indovina_parola(p))
                 {
-                    if (indovina_parola(p))
-                    {
-                        return true;
-                    }
-                }
-                else if (risposta != "si" && risposta != "no")
-                {
-                    Console.WriteLine("Errore! La scelta sbagliata");
+                    game_over = true;
                 }
             }
+            else
+            {
+                Console.WriteLine("Va bene! Continui a indovinare le lettere!");
+            }
         }
-        if(!new string(parola_con_trattini).Contains("_"))
-        {
-            return true;
-        }
-        Console.WriteLine($"Il numero dei tentativi: {tentativi}");
     }
-
-    return false;
+    return game_over;
 }
 
 bool indovina_parola(string p)
@@ -222,30 +234,67 @@ bool gioco()
 {
     string[] parola_scelte = new string[20];
     string parola, parola_segreta, ris;
+    string[] parole_indovinate = new string[60];
+    string[] parole_non_indovinate = new string[60];
 
-    int num_tentativi = 0;
+    int num_tentativi = 0, posizione_non_indovinate = 0, posizione_indovinate = 0;
     string filePath = tema_scelto();
 
+    bool risposta = false;
+
     string[] lines = File.ReadAllLines(filePath);
-    parole(lines, ref parola_scelte, num_tentativi);
+    parole(lines, ref parola_scelte, ref num_tentativi);
     parola = parola_casuale(parola_scelte);
     parola_segreta = parola_da_indovina(parola);
 
     if (indovina(parola_segreta, num_tentativi) == true)
     {
         Console.WriteLine("Congratulazioni! Hai indovinato la parola!");
+        parole_indovinate[posizione_indovinate++] = parola_segreta;
     }
     else
     {
         Console.WriteLine($"Oops! Hai esaurito tutti i tentativi, ma non preoccuparti! La parola segreta era: {parola_segreta}." +
-            $"\nNon arrenderti! Prova a fare meglio la prossima volta, ricordati che ogni tentativo è un passo più vicino alla vittoria! Ci vediamo al prossimo gioco!");
+            $"\nNon arrenderti! Prova a fare meglio la prossima volta, ricordati che ogni tentativo è un passo più vicino alla vittoria!");
+        parole_non_indovinate[posizione_non_indovinate++] = parola_segreta;
     }
 
+    while (risposta == false)
+    {
         Console.WriteLine("Vuoi provare di nuovo con una nuova parola? (si/no)");
         ris = Console.ReadLine().ToLower();
-    if (ris == "si")
-    {
-        return true;
+        if (ris == "si")
+        {
+            risposta = true;
+            return true;
+        }
+        else if (ris == "no")
+        {
+            risposta = true;
+
+            Console.Write("Le parole indovinate sono: ");
+            for (int i = 0; i < parole_indovinate.Length; i++)
+            {
+                if (parole_indovinate[i] != null)
+                {
+                    Console.Write($"{parole_indovinate[i]}, ");
+                }
+            }
+
+            Console.Write("Le parole non indovinate sono: ");
+            for (int i = 0; i < parole_non_indovinate.Length; i++)
+            {
+                if (parole_non_indovinate[i] != null)
+                {
+                    Console.Write($"{parole_non_indovinate[i]} ");
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("Errore! La risposta non valida" +
+                    "\nPerfavore inserisci la risposta valida");
+        }
     }
     return false;
 }
