@@ -384,6 +384,7 @@ bool gioco(ref int posizione_non_indovinate, ref int posizione_indovinate, ref i
     {
         monete += nm;
         Console.WriteLine("Congratulazioni! Hai indovinato la parola!");
+        Console.WriteLine($"Ricevi {nm} monete!");
         parole_indovinate[posizione_indovinate++] = parola_segreta;
     }
     else
