@@ -215,8 +215,31 @@ bool indovina(string p, int tentativi_max, int ind)
         {
             if (lettere_parola_segreta[i] == lettera)
             {
+<<<<<<< Updated upstream
                 parola_con_trattini[i] = lettera;
                 lettera_corretta = true;
+=======
+                Console.WriteLine(new string(parola_con_trattini));
+                Console.WriteLine("Vuoi provare a indovinare la parola completa? (si/no)");
+                string risposta = Console.ReadLine().ToLower();
+
+                if (risposta == "si")
+                {
+                    if (indovina_parola(p))
+                    {
+                        return true;
+                    }
+                }
+                else if (risposta != "si" && risposta != "no")
+                {
+                    Console.WriteLine("Errore! La scelta sbagliata");
+                }
+                else
+                {
+                    s = true;
+                    Console.WriteLine("Va bene");
+                }
+>>>>>>> Stashed changes
             }
         }
 

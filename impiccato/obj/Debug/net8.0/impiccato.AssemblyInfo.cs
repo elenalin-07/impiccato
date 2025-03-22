@@ -14,7 +14,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("impiccato")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f477ff46b163cedb9d6029633384b8a4597fd4ec")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f74739188217485030c8a6d0fd42a6b48fd83381")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("impiccato")]
 [assembly: System.Reflection.AssemblyTitleAttribute("impiccato")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
